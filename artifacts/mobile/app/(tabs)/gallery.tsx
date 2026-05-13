@@ -1,5 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   FlatList,
@@ -19,6 +21,7 @@ import { useColors } from "@/hooks/useColors";
 export default function GalleryScreen() {
   const colors = useColors();
   const insets = useSafeAreaInsets();
+  const router = useRouter();
   const topPad = Platform.OS === "web" ? 67 : insets.top;
 
   const [search, setSearch] = useState("");
@@ -107,6 +110,26 @@ export default function GalleryScreen() {
         </ScrollView>
       </View>
 
+      {/* Living Gallery Banner */}
+      <Pressable
+        onPress={() => router.push("/living-gallery" as never)}
+        style={styles.livingBanner}
+      >
+        <LinearGradient
+          colors={["#1a1200", "#2a1e00", "#1a1200"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.livingBannerGradient}
+        >
+          <View style={styles.livingBannerLeft}>
+            <View style={styles.livingDot} />
+            <Text style={styles.livingBannerLabel}>LIVING GALLERY</Text>
+          </View>
+          <Text style={styles.livingBannerSub}>Paintings come alive</Text>
+          <Feather name="chevron-right" size={16} color="#D4AF37" />
+        </LinearGradient>
+      </Pressable>
+
       {/* Results Count */}
       <View style={styles.countRow}>
         <Text style={[styles.countText, { color: colors.mutedForeground }]}>
@@ -179,4 +202,10 @@ const styles = StyleSheet.create({
   row: { justifyContent: "space-between", marginBottom: 16 },
   empty: { alignItems: "center", paddingTop: 80, gap: 12 },
   emptyText: { fontFamily: "Inter_400Regular", fontSize: 14 },
+  livingBanner: { marginHorizontal: 20, marginBottom: 8, borderRadius: 10, overflow: "hidden", borderWidth: 1, borderColor: "#D4AF3740" },
+  livingBannerGradient: { flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingVertical: 11, gap: 10 },
+  livingBannerLeft: { flexDirection: "row", alignItems: "center", gap: 6 },
+  livingDot: { width: 7, height: 7, borderRadius: 3.5, backgroundColor: "#D4AF37" },
+  livingBannerLabel: { fontFamily: "Inter_700Bold", fontSize: 11, color: "#D4AF37", letterSpacing: 2 },
+  livingBannerSub: { flex: 1, fontFamily: "Inter_400Regular", fontSize: 12, color: "rgba(255,255,255,0.55)", textAlign: "right", marginRight: 4 },
 });

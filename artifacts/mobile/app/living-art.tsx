@@ -137,6 +137,15 @@ export default function LivingArtScreen() {
             <Text style={[styles.scanBtnText, { color: colors.primaryForeground }]}>Start Scanning</Text>
           </Pressable>
 
+          <Pressable
+            onPress={() => router.push("/living-gallery" as never)}
+            style={[styles.livingBtn, { borderColor: `${colors.gold}50` }]}
+          >
+            <View style={[styles.livingDot, { backgroundColor: colors.gold }]} />
+            <Text style={[styles.livingBtnText, { color: colors.gold }]}>Open Living Gallery</Text>
+            <Feather name="chevron-right" size={14} color={colors.gold} />
+          </Pressable>
+
           <Text style={[styles.techNote, { color: "rgba(255,255,255,0.3)" }]}>
             Powered by MindAR · WebAR Architecture Ready
           </Text>
@@ -242,6 +251,9 @@ const styles = StyleSheet.create({
   scanBtn: { flexDirection: "row", alignItems: "center", gap: 10, paddingHorizontal: 32, paddingVertical: 16 },
   scanBtnText: { fontFamily: "Inter_700Bold", fontSize: 16 },
   techNote: { fontFamily: "Inter_400Regular", fontSize: 10, letterSpacing: 0.5 },
+  livingBtn: { flexDirection: "row", alignItems: "center", gap: 8, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 24, borderWidth: 1 },
+  livingDot: { width: 6, height: 6, borderRadius: 3 },
+  livingBtnText: { fontFamily: "Inter_600SemiBold", fontSize: 13 },
   scanning: { flex: 1, alignItems: "center", justifyContent: "center", gap: 24 },
   scanTarget: { width: 240, height: 240, position: "relative" },
   bracket: { position: "absolute", width: 32, height: 32, borderWidth: 3 },

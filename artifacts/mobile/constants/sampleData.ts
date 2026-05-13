@@ -471,6 +471,21 @@ export const SAMPLE_ARTWORKS: Artwork[] = [
     year: 2026,
     sold: false,
   },
+  {
+    id: "w20",
+    artistId: "gallery",
+    artistName: "GANA Gallery",
+    title: "Lion of Judah",
+    description: "Two lions rendered in bold graphic style against the red, gold, and green of the Ethiopian flag — one white, one black, each bearing the cross of authority. The Lion of Judah is a symbol of divine kingship, African pride, and the Rastafari movement's deep roots in East African spiritual identity. Screen print on board.",
+    category: "Mixed Media",
+    dimensions: "60cm × 80cm",
+    price: 2200000,
+    currency: "UGX",
+    imageUrl: "",
+    tags: ["lion", "Rastafari", "Judah", "Ethiopia", "symbol", "flag", "spiritual"],
+    year: 2026,
+    sold: false,
+  },
 ];
 
 export const SAMPLE_MEDIA: MediaTrack[] = [

@@ -18,6 +18,7 @@ const artworkImages: Record<string, ReturnType<typeof require>> = {
   w17: require("@/assets/images/artworks/painting_17_man_lion.jpg"),
   w18: require("@/assets/images/artworks/painting_18_orange_woman.jpg"),
   w19: require("@/assets/images/artworks/painting_19_elephant_family.jpg"),
+  w20: require("@/assets/images/artworks/painting_20_lion_of_judah.jpg"),
 };
 
 export function getArtworkImage(id: string): ReturnType<typeof require> | string {
