@@ -7,6 +7,7 @@ import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { useColors } from "@/hooks/useColors";
 import type { Artwork } from "@/constants/sampleData";
 import { formatUGX } from "@/constants/sampleData";
+import { getArtworkImage } from "@/constants/artworkImages";
 
 interface ArtworkCardProps {
   artwork: Artwork;
@@ -33,7 +34,7 @@ export function ArtworkCard({ artwork, width = 200, horizontal = false }: Artwor
           { backgroundColor: colors.card, borderColor: colors.border, borderRadius: colors.radius },
         ]}
       >
-        <Image source={{ uri: artwork.imageUrl }} style={styles.hImage} contentFit="cover" />
+        <Image source={getArtworkImage(artwork.id)} style={styles.hImage} contentFit="cover" />
         <View style={styles.hInfo}>
           <Text style={[styles.hTitle, { color: colors.foreground }]} numberOfLines={2}>
             {artwork.title}
@@ -57,7 +58,7 @@ export function ArtworkCard({ artwork, width = 200, horizontal = false }: Artwor
     >
       <View style={styles.imageContainer}>
         <Image
-          source={{ uri: artwork.imageUrl }}
+          source={getArtworkImage(artwork.id)}
           style={[styles.image, { width, height: width * 1.1 }]}
           contentFit="cover"
         />

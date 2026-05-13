@@ -14,6 +14,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { GoldButton } from "@/components/GoldButton";
 import { SAMPLE_ARTWORKS, SAMPLE_ARTISTS, formatUGX } from "@/constants/sampleData";
+import { getArtworkImage } from "@/constants/artworkImages";
 import { useColors } from "@/hooks/useColors";
 
 export default function ArtworkDetailScreen() {
@@ -59,7 +60,7 @@ export default function ArtworkDetailScreen() {
         {/* Image */}
         <View style={styles.imageWrapper}>
           <Image
-            source={{ uri: artwork.imageUrl }}
+            source={getArtworkImage(artwork.id)}
             style={styles.image}
             contentFit="cover"
           />
