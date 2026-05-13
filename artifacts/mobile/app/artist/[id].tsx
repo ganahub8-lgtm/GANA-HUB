@@ -15,6 +15,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ArtworkCard } from "@/components/ArtworkCard";
 import { GoldButton } from "@/components/GoldButton";
 import { SAMPLE_ARTISTS, SAMPLE_ARTWORKS } from "@/constants/sampleData";
+import { getArtistImage } from "@/constants/artistImages";
 import { useColors } from "@/hooks/useColors";
 
 export default function ArtistDetailScreen() {
@@ -40,7 +41,7 @@ export default function ArtistDetailScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
         {/* Hero */}
         <View style={styles.hero}>
-          <Image source={{ uri: artist.profileImage }} style={styles.heroImage} contentFit="cover" />
+          <Image source={getArtistImage(artist.id)} style={styles.heroImage} contentFit="cover" />
           <LinearGradient
             colors={["transparent", "rgba(10,10,10,0.9)", colors.background]}
             style={StyleSheet.absoluteFill}

@@ -4,6 +4,7 @@ import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useColors } from "@/hooks/useColors";
 import type { Artist } from "@/constants/sampleData";
+import { getArtistImage } from "@/constants/artistImages";
 
 interface ArtistCardProps {
   artist: Artist;
@@ -21,7 +22,7 @@ export function ArtistCard({ artist, compact = false }: ArtistCardProps) {
         style={[styles.compactCard, { backgroundColor: colors.card, borderRadius: colors.radius, borderColor: colors.border }]}
       >
         <Image
-          source={{ uri: artist.profileImage }}
+          source={getArtistImage(artist.id)}
           style={[styles.compactImage, { borderRadius: 40, borderColor: colors.gold }]}
           contentFit="cover"
         />
@@ -48,7 +49,7 @@ export function ArtistCard({ artist, compact = false }: ArtistCardProps) {
     >
       <View style={styles.header}>
         <Image
-          source={{ uri: artist.profileImage }}
+          source={getArtistImage(artist.id)}
           style={[styles.avatar, { borderColor: artist.featured ? colors.gold : colors.border }]}
           contentFit="cover"
         />

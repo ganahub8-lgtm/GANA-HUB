@@ -30,3 +30,33 @@ id = "hMvXPs5mYRE32m1DTr2L_"
 uri = "file://artifacts/mobile/assets/images/hero_banner.png"
 type = "image"
 title = "generated_image"
+
+[[generated]]
+id = "PXvQYgvW79d5hXlEMyCHA"
+uri = "file://artifacts/mobile/assets/images/artists/artist_amara.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "xNyASkObCIgstwHZtqap7"
+uri = "file://artifacts/mobile/assets/images/artists/artist_kwame.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "dg5_ziqS5sqDBTMMkH7Wa"
+uri = "file://artifacts/mobile/assets/images/artists/artist_zara.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "eKPypQv6SYK2UMODvRlKp"
+uri = "file://artifacts/mobile/assets/images/artists/artist_seun.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "lAzzU7eJ7JD-StSAhU0Rw"
+uri = "file://artifacts/mobile/assets/images/artists/artist_fatima.png"
+type = "image"
+title = "generated_image"
