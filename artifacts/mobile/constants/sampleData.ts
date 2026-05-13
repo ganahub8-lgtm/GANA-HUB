@@ -79,6 +79,24 @@ export interface Transaction {
 
 export const SAMPLE_ARTISTS: Artist[] = [
   {
+    id: "gallery",
+    fullName: "GANA Gallery",
+    stageName: "GANAGallery",
+    profileImage: "",
+    country: "Uganda",
+    city: "Kampala",
+    bio: "GANA Gallery is the curatorial arm of GANA HUB — sourcing, exhibiting, and selling original African artworks from painters, sculptors, and mixed media artists across the continent. Each work is authenticated and available for purchase or commission.",
+    categories: ["Curator", "Cultural Creative"],
+    whatsapp: "+256700000000",
+    email: "gallery@ganahub.com",
+    website: "https://ganahub.com",
+    socialLinks: { instagram: "@ganahub_gallery", facebook: "GANAHUBGallery" },
+    interests: ["Physical exhibitions", "Virtual exhibitions", "Marketplace selling", "International opportunities"],
+    featured: false,
+    followerCount: 12400,
+    artworkCount: 19,
+  },
+  {
     id: "a1",
     fullName: "Amara Nakimuli",
     stageName: "AmaraNaki",

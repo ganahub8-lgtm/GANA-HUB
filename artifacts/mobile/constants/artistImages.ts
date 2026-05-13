@@ -4,6 +4,7 @@ const artistImages: Record<string, ReturnType<typeof require>> = {
   a3: require("@/assets/images/artists/artist_zara.png"),
   a4: require("@/assets/images/artists/artist_seun.png"),
   a5: require("@/assets/images/artists/artist_fatima.png"),
+  gallery: require("@/assets/images/logo-gana-gallery.jpg"),
 };
 
 export function getArtistImage(artistId: string): ReturnType<typeof require> | string {
