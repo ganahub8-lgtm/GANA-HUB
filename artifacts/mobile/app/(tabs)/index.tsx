@@ -53,10 +53,11 @@ export default function HomeScreen() {
         <View style={styles.heroContent}>
           {/* Nav */}
           <View style={styles.heroNav}>
-            <View>
-              <Text style={styles.logoSub}>WELCOME TO</Text>
-              <Text style={[styles.logoTitle, { color: colors.gold }]}>GANA HUB</Text>
-            </View>
+            <Image
+              source={require("@/assets/images/logo-ganahub.jpg")}
+              style={styles.logoImg}
+              contentFit="contain"
+            />
             <View style={styles.navRight}>
               <Pressable onPress={() => router.push("/register-artist" as never)} style={styles.navBtn}>
                 <Feather name="user-plus" size={20} color={colors.foreground} />
@@ -210,16 +211,9 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingHorizontal: 20,
   },
-  logoSub: {
-    fontFamily: "Inter_500Medium",
-    fontSize: 10,
-    color: "#aaa",
-    letterSpacing: 3,
-  },
-  logoTitle: {
-    fontFamily: "Inter_700Bold",
-    fontSize: 28,
-    letterSpacing: 4,
+  logoImg: {
+    width: 180,
+    height: 56,
   },
   navRight: { flexDirection: "row", gap: 16, paddingTop: 4 },
   navBtn: { width: 36, height: 36, alignItems: "center", justifyContent: "center" },

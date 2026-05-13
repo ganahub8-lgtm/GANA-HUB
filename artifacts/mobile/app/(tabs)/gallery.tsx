@@ -1,4 +1,5 @@
 import { Feather } from "@expo/vector-icons";
+import { Image } from "expo-image";
 import React, { useState } from "react";
 import {
   FlatList,
@@ -38,10 +39,11 @@ export default function GalleryScreen() {
       {/* Header */}
       <View style={[styles.header, { paddingTop: topPad + 8 }]}>
         <View style={styles.headerRow}>
-          <View>
-            <Text style={[styles.headerSub, { color: colors.mutedForeground }]}>GANA</Text>
-            <Text style={[styles.headerTitle, { color: colors.foreground }]}>Gallery</Text>
-          </View>
+          <Image
+            source={require("@/assets/images/logo-gana-gallery.jpg")}
+            style={styles.galleryLogo}
+            contentFit="contain"
+          />
           <Pressable
             onPress={() => setViewMode((m) => (m === "grid" ? "list" : "grid"))}
             style={[styles.viewToggle, { backgroundColor: colors.muted, borderRadius: 8 }]}
@@ -157,9 +159,8 @@ export default function GalleryScreen() {
 const styles = StyleSheet.create({
   screen: { flex: 1 },
   header: { paddingHorizontal: 20, paddingBottom: 12, gap: 12 },
-  headerRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "flex-end" },
-  headerSub: { fontFamily: "Inter_500Medium", fontSize: 10, letterSpacing: 3 },
-  headerTitle: { fontFamily: "Inter_700Bold", fontSize: 28 },
+  headerRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  galleryLogo: { width: 180, height: 56 },
   viewToggle: { width: 40, height: 40, alignItems: "center", justifyContent: "center" },
   searchBox: {
     flexDirection: "row",

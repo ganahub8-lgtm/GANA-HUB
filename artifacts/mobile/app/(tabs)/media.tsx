@@ -69,8 +69,14 @@ export default function MediaScreen() {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 120 }}>
         {/* Header */}
         <View style={[styles.header, { paddingTop: topPad + 8 }]}>
-          <Text style={[styles.headerSub, { color: colors.mutedForeground }]}>GANA</Text>
-          <Text style={[styles.headerTitle, { color: colors.foreground }]}>Media</Text>
+          <Image
+            source={require("@/assets/images/logo-gana-studio.jpg")}
+            style={styles.studioLogo}
+            contentFit="contain"
+          />
+          <Text style={[styles.headerTagline, { color: colors.mutedForeground }]}>
+            Artist stories · Sessions · Live content
+          </Text>
         </View>
 
         {/* Now Playing Card */}
@@ -169,6 +175,7 @@ export default function MediaScreen() {
         <View style={styles.trackList}>
           {filtered.map((track) => {
             const isActive = currentTrack?.id === track.id;
+            const isVideo = track.type === "video";
             return (
               <Pressable
                 key={track.id}
@@ -176,29 +183,47 @@ export default function MediaScreen() {
                 style={[
                   styles.trackRow,
                   {
-                    backgroundColor: isActive ? colors.muted : "transparent",
+                    backgroundColor: isActive ? "#1A1208" : "#111111",
                     borderRadius: colors.radius,
-                    borderBottomColor: colors.border,
+                    borderWidth: 1,
+                    borderColor: isActive ? colors.gold : "#222",
                   },
                 ]}
               >
-                <Image source={{ uri: track.coverImage }} style={styles.trackCover} contentFit="cover" />
+                {/* Thumbnail with warm overlay */}
+                <View style={styles.coverWrap}>
+                  <Image source={{ uri: track.coverImage }} style={styles.trackCover} contentFit="cover" />
+                  <View style={[styles.coverOverlay, { backgroundColor: isActive ? "rgba(212,175,55,0.18)" : "rgba(180,80,0,0.22)" }]} />
+                  {/* GANA HUB badge */}
+                  <View style={styles.coverBadge}>
+                    <Text style={styles.coverBadgeText}>GANA HUB</Text>
+                  </View>
+                  {isVideo && (
+                    <View style={styles.videoBadge}>
+                      <Feather name="video" size={9} color="#fff" />
+                    </View>
+                  )}
+                </View>
+
                 <View style={styles.trackInfo}>
-                  <Text style={[styles.trackTitle, { color: isActive ? colors.gold : colors.foreground }]} numberOfLines={1}>
+                  <Text style={[styles.trackTitle, { color: isActive ? colors.gold : colors.foreground }]} numberOfLines={2}>
                     {track.title}
                   </Text>
                   <Text style={[styles.trackArtist, { color: colors.mutedForeground }]} numberOfLines={1}>
                     {track.artist}
                   </Text>
                   <View style={styles.trackMeta}>
-                    <View style={[styles.typeTag, { backgroundColor: colors.muted }]}>
+                    <View style={[
+                      styles.typeTag,
+                      { backgroundColor: isVideo ? "#0D2E2E" : "#1A1208" },
+                    ]}>
                       <Feather
-                        name={track.type === "audio" ? "headphones" : "video"}
-                        size={10}
-                        color={colors.mutedForeground}
+                        name={isVideo ? "video" : "headphones"}
+                        size={9}
+                        color={isVideo ? "#2DD4BF" : colors.gold}
                       />
-                      <Text style={[styles.typeText, { color: colors.mutedForeground }]}>
-                        {track.type}
+                      <Text style={[styles.typeText, { color: isVideo ? "#2DD4BF" : colors.gold }]}>
+                        {isVideo ? "VIDEO" : "AUDIO"}
                       </Text>
                     </View>
                     <Text style={[styles.trackDuration, { color: colors.mutedForeground }]}>
@@ -206,13 +231,14 @@ export default function MediaScreen() {
                     </Text>
                   </View>
                 </View>
-                {isActive && isPlaying ? (
-                  <Pressable onPress={togglePlay}>
-                    <Feather name="pause-circle" size={28} color={colors.gold} />
-                  </Pressable>
-                ) : (
-                  <Feather name="play-circle" size={28} color={isActive ? colors.gold : colors.mutedForeground} />
-                )}
+
+                <Pressable onPress={isActive ? togglePlay : () => handlePlay(track)}>
+                  <Feather
+                    name={isActive && isPlaying ? "pause-circle" : "play-circle"}
+                    size={30}
+                    color={isActive ? colors.gold : "#444"}
+                  />
+                </Pressable>
               </Pressable>
             );
           })}
@@ -224,9 +250,9 @@ export default function MediaScreen() {
 
 const styles = StyleSheet.create({
   screen: { flex: 1 },
-  header: { paddingHorizontal: 20, paddingBottom: 16 },
-  headerSub: { fontFamily: "Inter_500Medium", fontSize: 10, letterSpacing: 3 },
-  headerTitle: { fontFamily: "Inter_700Bold", fontSize: 28 },
+  header: { paddingHorizontal: 20, paddingBottom: 16, gap: 6 },
+  studioLogo: { width: 200, height: 70 },
+  headerTagline: { fontFamily: "Inter_400Regular", fontSize: 11, letterSpacing: 1 },
   nowPlaying: {
     marginHorizontal: 20,
     padding: 20,
@@ -285,27 +311,58 @@ const styles = StyleSheet.create({
   categories: { paddingHorizontal: 20, paddingRight: 8, gap: 8 },
   chip: { paddingHorizontal: 14, paddingVertical: 6 },
   chipText: { fontFamily: "Inter_500Medium", fontSize: 12 },
-  trackList: { paddingHorizontal: 20, marginTop: 16, gap: 4 },
+  trackList: { paddingHorizontal: 16, marginTop: 16, gap: 8 },
   trackRow: {
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
     gap: 12,
-    borderBottomWidth: 0,
   },
-  trackCover: { width: 54, height: 54, borderRadius: 8, backgroundColor: "#1A1A1A" },
-  trackInfo: { flex: 1, gap: 3 },
-  trackTitle: { fontFamily: "Inter_600SemiBold", fontSize: 13 },
+  coverWrap: {
+    width: 68,
+    height: 68,
+    borderRadius: 8,
+    overflow: "hidden",
+    backgroundColor: "#1A1A1A",
+    flexShrink: 0,
+  },
+  trackCover: { width: 68, height: 68, position: "absolute" },
+  coverOverlay: { ...StyleSheet.absoluteFillObject },
+  coverBadge: {
+    position: "absolute",
+    bottom: 4,
+    left: 4,
+    backgroundColor: "rgba(0,0,0,0.7)",
+    paddingHorizontal: 4,
+    paddingVertical: 1,
+    borderRadius: 3,
+  },
+  coverBadgeText: {
+    fontFamily: "Inter_700Bold",
+    fontSize: 6,
+    color: "#D4AF37",
+    letterSpacing: 0.5,
+  },
+  videoBadge: {
+    position: "absolute",
+    top: 4,
+    right: 4,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    padding: 3,
+    borderRadius: 3,
+  },
+  trackInfo: { flex: 1, gap: 4 },
+  trackTitle: { fontFamily: "Inter_600SemiBold", fontSize: 13, lineHeight: 17 },
   trackArtist: { fontFamily: "Inter_400Regular", fontSize: 11 },
   trackMeta: { flexDirection: "row", gap: 8, alignItems: "center" },
   typeTag: {
     flexDirection: "row",
     alignItems: "center",
     gap: 4,
-    paddingHorizontal: 7,
-    paddingVertical: 2,
+    paddingHorizontal: 6,
+    paddingVertical: 3,
     borderRadius: 4,
   },
-  typeText: { fontFamily: "Inter_400Regular", fontSize: 9, letterSpacing: 0.5 },
+  typeText: { fontFamily: "Inter_700Bold", fontSize: 8, letterSpacing: 1 },
   trackDuration: { fontFamily: "Inter_400Regular", fontSize: 10 },
 });
